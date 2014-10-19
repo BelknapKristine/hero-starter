@@ -176,11 +176,22 @@ var moves = {
   // This hero will try really hard not to die.
   coward : function(gameData, helpers) {
     return helpers.findNearestHealthWell(gameData);
+  },
+
+  // The "Graverobber"
+  // This hero will rob graves and try really hard not die.
+  graverobber : function(gameData, helpers) {
+    var myHero = gameData.activeHero;
+    var graveStats = helpers.findNearestGraveStats(gameData);
+	if (graveStats && myHero.health >= 60)
+	  return graveStats.direction;
+	else
+      return helpers.findNearestHealthWell(gameData);
   }
  };
 
 //  Set our heros strategy
-var  move =  moves.aggressor;
+var  move =  moves.graverobber;
 
 // Export the move function here
 module.exports = move;

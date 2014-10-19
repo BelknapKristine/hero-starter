@@ -246,4 +246,16 @@ helpers.findNearestTeamMember = function(gameData) {
   return pathInfoObject.direction;
 };
 
+// Returns the nearest grave stats or false, if there are no graves
+helpers.findNearestGraveStats = function(gameData) {
+  var hero = gameData.activeHero;
+  var board = gameData.board;
+  //Get the path info object
+  var pathInfoObject = helpers.findNearestObjectDirectionAndDistance(board, hero, function(graveTile) {
+    return graveTile.subType === 'Bones';
+  });
+  //Return the path info object of the goal
+  return pathInfoObject;
+};
+
 module.exports = helpers;
